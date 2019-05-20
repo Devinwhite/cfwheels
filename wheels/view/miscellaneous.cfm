@@ -107,6 +107,8 @@ public string function flashMessages(
 	string keys,
 	string class,
 	boolean includeEmptyContainer,
+	string prepend,
+    string append,
 	boolean encode
 ) {
 	$args(name="flashMessages", args=arguments, combine="keys/key");
@@ -144,7 +146,7 @@ public string function flashMessages(
 
 	if (Len(local.listItems) || arguments.includeEmptyContainer) {
 		local.encode = arguments.encode ? "attributes" : false;
-		local.rv = $element(name="div", skip="key,keys,includeEmptyContainer,encode", content=local.listItems, attributes=arguments, encode=local.encode);
+		local.rv = prepend & $element(name="div", skip="key,keys,includeEmptyContainer,prepend,append,encode", content=local.listItems, attributes=arguments, encode=local.encode) & append;
 	}
 	return local.rv;
 }

@@ -271,6 +271,11 @@ public struct function $match(
 		arguments.controller = variables.scopeStack[1].controller;
 	}
 
+	// Use scoped routeKey if found.
+	if (StructKeyExists(variables.scopeStack[1], "routeKey") && !StructKeyExists(arguments, "routeKey")) {
+		arguments.routeKey = variables.scopeStack[1].routeKey;
+	}
+
 	// Use scoped package if found.
 	if (StructKeyExists(variables.scopeStack[1], "package")) {
 		if (StructKeyExists(arguments, "package")) {

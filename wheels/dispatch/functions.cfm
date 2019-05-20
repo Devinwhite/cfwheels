@@ -29,7 +29,8 @@ public struct function $createParams(
 	local.rv = $ensureControllerAndAction(params=local.rv, route=arguments.route);
 	local.rv = $addRouteFormat(params=local.rv, route=arguments.route);
 	local.rv = $addRouteName(params=local.rv, route=arguments.route);
-
+	local.rv = $addRouteKey(params=local.rv, route=arguments.route);
+	
 	return local.rv;
 }
 
@@ -459,6 +460,17 @@ public struct function $addRouteName(required struct params, required struct rou
 		local.rv.route = arguments.route.name;
 	}
 	return local.rv;
+}
+
+/**
+ * Adds in the route key variable from the route if it exists.
+ */
+public struct function $addRouteKey(required struct params, required struct route) {
+    local.rv = arguments.params;
+    if (StructKeyExists(arguments.route, "routeKey") && Len(arguments.route.routeKey) && !StructKeyExists(local.rv, "routeKey")) {
+        local.rv.routeKey = arguments.route.routeKey;
+    }
+    return local.rv;
 }
 
 /**

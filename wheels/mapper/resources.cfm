@@ -159,6 +159,10 @@ public struct function resource(
 		local.args.constraints = arguments.constraints;
 	}
 
+	if (StructKeyExists(arguments, "routeKey")) {
+        local.args.routeKey = arguments.routeKey;
+	}
+	
 	// Pass along mapFormat preference
 	if (StructKeyExists(arguments, "mapFormat")) {
 		local.args.mapFormat = arguments.mapFormat;
