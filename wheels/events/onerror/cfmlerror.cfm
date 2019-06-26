@@ -58,7 +58,7 @@
 		<cfif NOT ListFindNoCase(local.skip, local.scopeName) AND IsDefined(local.scopeName)>
 			<cftry>
 				<cfset local.scope = Evaluate(local.i)>
-				<cfif IsStruct(local.scope)>
+				<cfif IsStruct(local.scope) or IsObject(local.scope)>
 					<p><strong>#local.scopeName#</strong>
 					<cfset local.hide = "wheels">
 					<cfloop list="#local.skip#" index="local.j">

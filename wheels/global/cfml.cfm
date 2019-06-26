@@ -150,12 +150,12 @@
 		</cfif>
 		<cfset StructDelete(arguments, "invokeArgs")>
 	</cfif>
-	<cfif !structKeyExists(request, "$wheelsInvoked")>
+	<!--- <cfif !structKeyExists(request, "$wheelsInvoked")>
 		<cfset request.$wheelsInvoked = arrayNew(1)>
 	</cfif>
-	<cfset arrayPrepend(request.$wheelsInvoked, duplicate(arguments))>
+	<cfset arrayPrepend(request.$wheelsInvoked, duplicate(arguments))> --->
 	<cfinvoke attributeCollection="#arguments#">
-	<cfset arrayDeleteAt(request.$wheelsInvoked, 1)>
+	<!--- <cfset arrayDeleteAt(request.$wheelsInvoked, 1)> --->
 	<cfif StructKeyExists(local, "rv")>
 		<cfreturn local.rv>
 	</cfif>
