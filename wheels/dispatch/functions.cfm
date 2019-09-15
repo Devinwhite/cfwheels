@@ -194,6 +194,14 @@ public string function $request(
 	if(listFirst(local.params.controller, '.') EQ "wheels"){
 		if(!application.wheels.enablePublicComponent){
 			// Hard abort if GUI turned off
+			if (StructKeyExists(application, "wheels")) {
+				if (StructKeyExists(application.wheels, "showErrorInformation") && !application.wheels.showErrorInformation) {
+					$header(statusCode=404, statustext="Not Found");
+				}
+				if (StructKeyExists(application.wheels, "eventPath")) {
+					$includeAndOutput(template="#application.wheels.eventPath#/onmissingtemplate.cfm");
+				}
+			}
 			abort;
 		} else {
 			local.action = application.wheels.public[params.action];
