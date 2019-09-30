@@ -161,7 +161,7 @@ public any function renderWith(
 							}
 						}
 					}
-					local.content = SerializeJSON(arguments.data);
+					local.content = SerializeJSON(arguments.data,'struct');
 					if (Find(Chr(7), local.content)) {
 						local.content = Replace(local.content, Chr(7), "", "all");
 					}

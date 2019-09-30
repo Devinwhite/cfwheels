@@ -406,6 +406,7 @@ public string function select(
 	string position,
 	any options,
 	any includeBlank,
+	struct blankOptionAttributes = {value=""},
 	string valueField,
 	string textField,
 	string label,
@@ -440,11 +441,11 @@ public string function select(
 		} else {
 			local.blankOptionText = "";
 		}
-		local.blankOptionAttributes = {value=""};
-		local.content = $element(name="option", content=local.blankOptionText, attributes=local.blankOptionAttributes, encode=arguments.encode) & local.content;
+		
+		local.content = $element(name="option", content=local.blankOptionText, attributes=arguments.blankOptionAttributes, encode=arguments.encode) & local.content;
 	}
 	local.encode = IsBoolean(arguments.encode) && !arguments.encode ? false : "attributes";
-	return local.before & $element(name="select", skip="objectName,property,options,includeBlank,valueField,textField,label,labelPlacement,prepend,append,prependToLabel,appendToLabel,errorElement,errorClass,association,position,encode", skipStartingWith="label", content=local.content, attributes=arguments, encode=local.encode) & local.after;
+	return local.before & $element(name="select", skip="objectName,property,options,includeBlank,blankOptionAttributes,valueField,textField,label,labelPlacement,prepend,append,prependToLabel,appendToLabel,errorElement,errorClass,association,position,encode", skipStartingWith="label", content=local.content, attributes=arguments, encode=local.encode) & local.after;
 }
 
 /**
