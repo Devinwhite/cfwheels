@@ -58,7 +58,7 @@ public void function onApplicationStart() {
 	request.cgi = $cgiScope();
 
 	// Set up containers for routes, caches, settings etc.
-	application.$wheels.version = "2.0.2";
+	application.$wheels.version = "2.1.0 Beta";
 	try {
 		application.$wheels.hostName = CreateObject("java", "java.net.InetAddress").getLocalHost().getHostName();
 	} catch (any e) {}
@@ -274,6 +274,7 @@ public void function onApplicationStart() {
 		application.$wheels.redirectAfterReload = true;
 	}
 	application.$wheels.validateTestPackageMetaData = true;
+	application.$wheels.resetPropertiesStructKeyCase = true;
 
 	// If session management is enabled in the application we default to storing Flash data in the session scope, if not we use a cookie.
 	if (StructKeyExists(this, "sessionManagement") && this.sessionManagement) {
@@ -330,7 +331,7 @@ public void function onApplicationStart() {
 	application.$wheels.functions.findByKey = {reload=false, parameterize=true, returnAs="object"};
 	application.$wheels.functions.findOne = {reload=false, parameterize=true, returnAs="object"};
 	application.$wheels.functions.flashKeep = {};
-	application.$wheels.functions.flashMessages = {class="flash-messages", includeEmptyContainer="false", prepend="", append="", encode=true};
+	application.$wheels.functions.flashMessages = {class="flash-messages", includeEmptyContainer="false", encode=true};
 	application.$wheels.functions.hasMany = {joinType="outer", dependent=false};
 	application.$wheels.functions.hasManyCheckBox = {encode=true};
 	application.$wheels.functions.hasManyRadioButton = {encode=true};
@@ -409,15 +410,10 @@ public void function onApplicationStart() {
 
 	// Load general developer settings first, then override with environment specific ones.
 	$include(template="config/settings.cfm");
-	$include(template="config/#application.$wheels.environment#/settings.cfm");
-
-	// Auto Migrate Database if requested
-	if(application.$wheels.enableMigratorComponent){
-		application.$wheels.migrator = $createObjectFromRoot(path="wheels", fileName="Migrator", method="init");
-		if (application.$wheels.autoMigrateDatabase){
-			application.$wheels.migrator.migrateToLatest();
-		}
+	if (FileExists(ExpandPath("/app/config/#application.$wheels.environment#/settings.cfm"))) {
+		$include(template="config/#application.$wheels.environment#/settings.cfm");
 	}
+
 	// Clear query (cfquery) and page (cfcache) caches.
 	if (application.$wheels.clearQueryCacheOnReload or !StructKeyExists(application.$wheels, "cacheKey")) {
 		application.$wheels.cacheKey = Hash(CreateUUID());
@@ -466,6 +462,14 @@ public void function onApplicationStart() {
 	// Assign it all to the application scope in one atomic call.
 	application.wheels = application.$wheels;
 	StructDelete(application, "$wheels");
+
+	// Auto Migrate Database if requested
+	if(application.wheels.enableMigratorComponent){
+		application.wheels.migrator = $createObjectFromRoot(path="wheels", fileName="Migrator", method="init");
+		if (application.wheels.autoMigrateDatabase){
+			application.wheels.migrator.migrateToLatest();
+		}
+	}
 
 	// Run the developer's on application start code.
 	$include(template="#application.wheels.eventPath#/onapplicationstart.cfm");
