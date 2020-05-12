@@ -87,6 +87,12 @@ public void function $pluginsExtract() {
 				}
 			}
 			$zip(action="unzip", destination=local.plugin.folderPath, file=local.plugin.file, overwrite=true);
+			local.gitHubReleaseCheck = local.plugin.folderPath;
+			local.gitHubFolderName = ReplaceNoCase(local.plugin.name, '.zip', '');
+			if(DirectoryExists(local.gitHubReleaseCheck&'/'&local.gitHubFolderName)){
+				DirectoryCopy(local.gitHubReleaseCheck&'/'&local.gitHubFolderName,variables.$class.pluginPathFull&'/'&local.p,true);
+				DirectoryDelete(local.gitHubReleaseCheck&'/'&local.gitHubFolderName, true);
+			}
 		}
 	};
 }

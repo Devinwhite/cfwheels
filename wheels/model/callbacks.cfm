@@ -368,7 +368,7 @@ public boolean function $queryCallback(required string method, required query co
 	}
 
 	// Update the request with a hash of the query if it changed so that we can find it with pagination.
-	local.querykey = $hashedKey(arguments.collection);
+	local.querykey = $hashedKey(duplicate(arguments.collection));
 	if (!StructKeyExists(request.wheels, local.querykey)) {
 		request.wheels[local.querykey] = variables.wheels.class.modelName;
 	}

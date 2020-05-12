@@ -107,8 +107,8 @@ public string function flashMessages(
 	string keys,
 	string class,
 	boolean includeEmptyContainer,
-	string prepend,
-    string append,
+	string prepend = "",
+    string append = "",
 	boolean encode
 ) {
 	$args(name="flashMessages", args=arguments, combine="keys/key");
