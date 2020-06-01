@@ -8,6 +8,7 @@
 - Added `automaticValidations` argument to the `property` method - [Per Djurner]
 - Support named second argument in `findOneBy[Property]And[Property]` and `findAllBy[Property]And[Property]` - [Per Djurner]
 - Support `value` argument in `findOrCreateBy[Property]` - [Per Djurner]
+- Minor fix for `full null support` - [Michael Diederich]
 
 ### View Enhancements
 
@@ -31,6 +32,7 @@
 - Allow the combination of `url` and `params` arguments with `redirectTo` - [Adam Chapman]
 - Display content in maintenance mode on newer Lucee versions [#848](https://github.com/cfwheels/cfwheels/issues/848) - [Per Djurner]
 - Fixed some variable scoping - [Michael Diederich]
+- Github Actions CI Pipeline - [Adam Chapman, Tom King]
 
 <a name="2.1"></a>
 
