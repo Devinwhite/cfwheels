@@ -299,7 +299,8 @@ public any function $associationMethod() {
 			arguments.missingMethodArguments.include = local.include;
 			local.where = $keyWhereString(
 				properties = local.joinAssociation.foreignKey,
-				keys = local.componentReference.primaryKeys()
+				//keys = local.componentReference.primaryKeys()
+				keys = variables.wheels.class.associations[local.key].joinKey
 			);
 			if (StructKeyExists(arguments.missingMethodArguments, "where")) {
 				local.where = "(#local.where#) AND (#arguments.missingMethodArguments.where#)";
