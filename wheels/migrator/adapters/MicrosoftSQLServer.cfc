@@ -119,7 +119,7 @@ component extends="Abstract" {
 					local.sql = local.sql & "ALTER TABLE #quoteTableName(arguments.name)# ALTER COLUMN #objectCase(arguments.column.name)# #arguments.column.sqlType()# #local.columnSQL#;";
 				} else if (local.i == "default") {
 					// SQL server will throw an exception if a default constraint exists
-					local.sql = local.sql & "ALTER TABLE #quoteTableName(arguments.name)# ADD CONSTRAINT DF_#objectCase(arguments.column.name)# #local.columnSQL# FOR #objectCase(arguments.column.name)#;";
+					local.sql = local.sql & "ALTER TABLE #quoteTableName(arguments.name)# ADD CONSTRAINT DF_#objectCase(arguments.name)#_#objectCase(arguments.column.name)# #local.columnSQL# FOR #objectCase(arguments.column.name)#;";
 				}
 			}
 		}
