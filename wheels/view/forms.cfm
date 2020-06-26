@@ -319,7 +319,7 @@ public string function $formValue(required any objectName, required string prope
 			local.rv = "";
 		}
 	}
-	return local.rv;
+	return local.rv.toString();
 }
 
 /**

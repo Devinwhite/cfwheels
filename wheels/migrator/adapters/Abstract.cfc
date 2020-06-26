@@ -90,7 +90,11 @@ component {
 				} else if (arguments.options.type == 'string' && arguments.options.default eq "") {
 					arguments.sql = arguments.sql;
 				} else {
-					arguments.sql = arguments.sql & " DEFAULT #quote(value = arguments.options.default, options = arguments.options)#";
+					if(find('()',arguments.options.default)){
+						arguments.sql = arguments.sql & " DEFAULT #arguments.options.default#";
+					}else{
+						arguments.sql = arguments.sql & " DEFAULT #quote(value = arguments.options.default, options = arguments.options)#";
+					}
 				}
 			}
 			if (StructKeyExists(arguments.options, 'null')) {

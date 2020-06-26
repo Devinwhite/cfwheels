@@ -342,6 +342,9 @@ public any function findAll(
 			) {
 				local.finderArgs.cachedWithin = $timeSpanForCache(arguments.cache);
 			}
+			if(structKeyExists(arguments,"AppendSql")){
+				local.finderArgs.AppendSql = arguments.AppendSql;
+			}			
 			local.findAll = variables.wheels.class.adapter.$querySetup(
 				argumentCollection = local.finderArgs
 			);

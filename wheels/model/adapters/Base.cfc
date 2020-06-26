@@ -422,7 +422,8 @@ component output=false {
 		numeric limit = 0,
 		numeric offset = 0,
 		string $primaryKey = "",
-		string $debugName = "query"
+		string $debugName = "query",
+		string appendsql = ""
 	) {
 		local.queryAttributes = {};
 		local.queryAttributes.dataSource = variables.dataSource;
@@ -455,6 +456,7 @@ component output=false {
 		StructDelete(local.orgArgs, "$debugName");
 		StructDelete(local.orgArgs, "limit");
 		StructDelete(local.orgArgs, "offset");
+		StructDelete(local.orgArgs, "appendsql");
 		StructDelete(local.orgArgs, "$primaryKey");
 		StructAppend(local.queryAttributes, local.orgArgs);
 		return $executeQuery(
@@ -465,7 +467,8 @@ component output=false {
 			offset = arguments.offset,
 			comment = local.comment,
 			debugName = arguments.$debugName,
-			primaryKey = arguments.$primaryKey
+			primaryKey = arguments.$primaryKey,
+			appendsql = arguments.appendsql
 		);
 	}
 

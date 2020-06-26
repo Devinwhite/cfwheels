@@ -552,7 +552,9 @@ public void function $setProperty(
  * Internal function.
  */
 public void function $updatePersistedProperties(string property) {
-	variables.$persistedProperties = {};
+	if(!structKeyExists(variables,"$persistedProperties")){
+		variables.$persistedProperties = {};
+	}
 	for (local.key in variables.wheels.class.properties) {
 		if (StructKeyExists(this, local.key) && (!StructKeyExists(arguments, "property") || arguments.property == local.key)) {
 			variables.$persistedProperties[local.key] = this[local.key];
