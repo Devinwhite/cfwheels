@@ -2,6 +2,11 @@
 
 # [2.2](TBC)
 
+### Controller Enhancements
+
+- Added the `status` argument to all `render*()` functions to force returning a specific HTTP status code [#1025](https://github.com/cfwheels/cfwheels/issues/1025) - [Adam Chapman, Tom King]
+- CORS `accessControlAllowOrigin` can now match subdomain wildcards [#1031](https://github.com/cfwheels/cfwheels/issues/1031) - [Tom King]
+
 ### Model Enhancements
 
 - Experimental adapter for Oracle database - [Andrei B]
@@ -13,7 +18,6 @@
 ### View Enhancements
 
 - Added the `required` argument to `imageTag` to suppress exceptions if using non-existent files [#979](https://github.com/cfwheels/cfwheels/issues/979) - [Adam Chapman, Michael Diederich]
-- Removed authenticity token id attribute to avoid non-unique id warnings in Chrome [#953](https://github.com/cfwheels/cfwheels/issues/953) - [Per Djurner]
 
 ### Bug Fixes
 
@@ -22,6 +26,8 @@
 - Display content in maintenance mode on newer Lucee versions [#848](https://github.com/cfwheels/cfwheels/issues/848) - [Per Djurner]
 - `validatesUniquenessOf` does not respect allowBlank [#914](https://github.com/cfwheels/cfwheels/issues/914) - [Adam Chapman]
 - `Wheels.RouteNotFound` Error page now escapes the `arguments.path` to prevent XSS attacks - [Michael Diederich]
+- `buttonTo()` now uses `<button>` internally instead of `<input>` allowing for html in content - [#798](https://github.com/cfwheels/cfwheels/issues/798) - [Tom Sucaet, Tom King, Per Djurner]
+- Minor SQL preview fix in GUI - [#992](https://github.com/cfwheels/cfwheels/issues/992) - [Brandon Shea, Tom King]
 
 ### Miscellaneous
 
@@ -30,9 +36,11 @@
 - Minimum Lucee 5 version is now 5.3.2.77 - Tests added - [Michael Diederich]
 - Use `http_x_forwarded_proto` to determine if the application is running behind a loadbalancer that is performing SSL offloading - [Peter Amiri]
 - Allow the combination of `url` and `params` arguments with `redirectTo` - [Adam Chapman]
-- Display content in maintenance mode on newer Lucee versions [#848](https://github.com/cfwheels/cfwheels/issues/848) - [Per Djurner]
 - Fixed some variable scoping - [Michael Diederich]
 - Github Actions CI Pipeline - [Adam Chapman, Tom King]
+- Flash Cookie can now be disabled via `set(flashStorage="none")` [#978](https://github.com/cfwheels/cfwheels/issues/978) [Tom King]
+- `processRequest()` accepts a route param -[#1030](https://github.com/cfwheels/cfwheels/issues/1030) - [Adam Chapman]
+- Migration files are written with 664 mode -[#1034](https://github.com/cfwheels/cfwheels/issues/1034) - [Adam Chapman]
 
 <a name="2.1"></a>
 
