@@ -46,7 +46,7 @@
 			<p>
 				<strong>URL:</strong>
 				<br>
-							http<cfif cgi.http_x_forwarded_proto == "https" OR cgi.server_port_secure == "true">s</cfif>
+							http<cfif cgi.http_x_forwarded_proto eq "https" OR cgi.server_port_secure eq "true">s</cfif>
 				://#cgi.server_name##Replace(cgi.script_name, "/#application.wheels.rewriteFile#", "")#<cfif IsDefined("request.cgi.path_info")>
 					#request.cgi.path_info#<cfelse>#cgi.path_info#
 				</cfif>
