@@ -252,7 +252,7 @@ public any function renderWith(
 							}
 						}
 					}
-					local.content = SerializeJSON(arguments.data);
+					local.content = SerializeJSON(arguments.data, "struct");
 					if (Find(Chr(7), local.content)) {
 						local.content = Replace(local.content, Chr(7), "", "all");
 					}
@@ -838,8 +838,8 @@ public struct function $getStatusCodes() {
  */
 public string function $acceptableFormats() {
 	local.rv = variables.$class.formats.default;
-	if (StructKeyExists(variables.$class.formats, arguments.action)) {
-		local.rv = variables.$class.formats[arguments.action];
+	if (StructKeyExists(variables.$class.formats.actions, arguments.action)) {
+		local.rv = variables.$class.formats.actions[arguments.action];
 	}
 	return local.rv;
 }

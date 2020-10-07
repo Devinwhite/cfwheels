@@ -583,7 +583,7 @@ public string function $optionsForSelect(
 			local.key = ListGetAt(local.sortedKeys, local.i);
 			local.rv &= $option(
 				objectValue = local.value,
-				optionValue = LCase(local.key),
+				optionValue = local.key,
 				optionText = arguments.options[local.key],
 				encode = arguments.encode
 			);
@@ -642,7 +642,7 @@ public string function $optionsForSelect(
 				if (StructCount(local.object) == 1) {
 					// When the struct only has one element then use the key / value pair.
 					local.key = StructKeyList(local.object);
-					local.optionValue = LCase(local.key);
+					local.optionValue = local.key;
 					local.optionText = local.object[local.key];
 				} else {
 					if (StructKeyExists(local.object, arguments.valueField)) {
